@@ -7,12 +7,13 @@
 [![Gradle CI](https://github.com/Winterreisender/webviewkoCLI/actions/workflows/gradle-ci.yml/badge.svg)](https://github.com/Winterreisender/webviewkoCLI/actions/workflows/gradle-ci.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Winterreisender/webviewkoCLI)
 
-
 <!-- **English** | [中文(简体)](docs/README.zh-Hans.md) | [中文(繁體)](docs/README.zh-Hant.md) -->
 
 A simple commandline interface for [webviewko](https://github.com/Winterreisender/webviewko).
 
 webviewko provides a Kotlin/Java binding to [webview](https://github.com/webview/webview), a tiny cross-platform webview library to build modern cross-platform GUIs using [WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/), WebKit and [WebKitGTK](https://webkitgtk.org/).
+
+![screenshot](screenshot.jpg)
 
 ## Getting Started
 
