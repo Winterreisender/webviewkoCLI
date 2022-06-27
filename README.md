@@ -16,6 +16,10 @@ webviewko provides a Kotlin/Java binding to [webview](https://github.com/webview
 
 ## Getting Started
 
+### Prerequisite
+
+A x64 system with Java 11+
+
 ### Reference
 
 ```shell
