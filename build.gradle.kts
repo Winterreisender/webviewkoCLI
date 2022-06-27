@@ -7,7 +7,7 @@ plugins {
 
 
 group = "com.github.Winterreisender"
-version = "v0.0.1-experimental.15"
+version = "0.1.1"
 description = "webviewko"
 
 repositories {
@@ -48,5 +48,9 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.4")
     implementation("org.jetbrains.kotlinx:kotlinx-cli-jvm:0.3.4")
-    implementation("com.github.Winterreisender:webviewko:v0.0.1-experimental.15")
+    implementation("com.github.Winterreisender:webviewko:latest.release")
+    //{
+    //    exclude("net.java.dev.jna","jna")
+    //}
+
 }

@@ -24,12 +24,15 @@ class Main {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
+
             with(ArgParser("webviewko")) {
-                val url    by argument(ArgType.String, description = "URI/URL")
-                val width  by option(ArgType.Int, description = "window width in px").default(800)
-                val height by option(ArgType.Int, description = "window height in px").default(600)
-                val debug  by option(ArgType.Boolean, description = "use debug mode").default(false)
-                val title  by option(ArgType.String, shortName = "t", description = "window title").default("webviewko")
+                val url    by argument(ArgType.String, description = "URI/URL to navigate")
+                val title  by option(ArgType.String, shortName = "t", description = "Window title").default("webviewko")
+                val width  by option(ArgType.Int, description = "Window width in px").default(800)
+                val height by option(ArgType.Int, description = "Window height in px").default(600)
+                val hint   by option(ArgType.Choice<WebviewKo.WindowHint>(), description = "Window hint").default(WebviewKo.WindowHint.None)
+                val init   by option(ArgType.String, description = "JS to run on page loading").default("")
+                val debug  by option(ArgType.Boolean, description = "Debug mode").default(false)
                 parse(args)
 
                 if (debug) {
@@ -37,20 +40,21 @@ class Main {
                     System.setProperty("jna.tmpdir", ".")
                 }
 
-                //run webviewKo
+                //run webviewKo. Use `let` instead of `with` because `title(title)` is ambiguous
                 try {
-                    with(WebviewKo()) {
-                        title(title)
-                        size(width, height)
-                        url(url)
-                        show()
+                    WebviewKo(if(debug) 1 else 0).let {
+                        it.title(title)
+                        it.size(width, height, hint)
+                        if (init.isNotEmpty() ) {
+                            it.init(init)
+                        }
+                        it.navigate(url)
+                        it.show()
                     }
                 } catch (e: Throwable) {
                     e.printStackTrace()
                 }
-
             }
-
         }
     }
 
