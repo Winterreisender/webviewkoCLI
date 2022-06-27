@@ -1,9 +1,9 @@
-# webviewko
+# webviewkoCLI
 
 ![Top language](https://img.shields.io/github/languages/top/Winterreisender/webviewkoCLI?color=b99bf8&logo=kotlin)
 ![license](https://img.shields.io/github/license/Winterreisender/webviewkoCLI)
 
-![dev release](https://img.shields.io/github/v/release/Winterreisender/webviewko?label=dev&include_prereleases)
+![release](https://img.shields.io/github/v/release/Winterreisender/webviewkoCLI?label=dev&include_prereleases)
 [![Gradle CI](https://github.com/Winterreisender/webviewkoCLI/actions/workflows/gradle-ci.yml/badge.svg)](https://github.com/Winterreisender/webviewkoCLI/actions/workflows/gradle-ci.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Winterreisender/webviewkoCLI)
 
