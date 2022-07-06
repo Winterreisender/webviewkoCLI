@@ -10,7 +10,7 @@ jobs:
         runs-on: windows-latest
         steps:
             - uses: actions/checkout@v3
-            - name: Setup Java JDK 11
+            - name: Setup Java JDK 8
               uses: actions/setup-java@v3
               with:
                   java-version: '8'
@@ -24,10 +24,10 @@ jobs:
               with:
                   gradle-version: 7.4.2
 
-            - name: shadowJar with Gradle
+            - name: uberJar with Gradle
               uses: gradle/gradle-build-action@v2
               with:
-                  arguments: jvm:shadowJar
+                  arguments: jvm:uberJar
 
             - name: Upload JVM
               uses: actions/upload-artifact@v2
