@@ -7,13 +7,13 @@ on:
 
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: windows-latest
         steps:
             - uses: actions/checkout@v3
             - name: Setup Java JDK 11
               uses: actions/setup-java@v3
               with:
-                  java-version: '11'
+                  java-version: '8'
                   distribution: 'temurin'
 
             - name: Make gradlew executable
@@ -27,13 +27,21 @@ jobs:
             - name: shadowJar with Gradle
               uses: gradle/gradle-build-action@v2
               with:
-                  arguments: shadowJar
+                  arguments: jvm:shadowJar
 
-            - name: Copy Jars to Staging
-              run: mkdir staging && cp -r build/libs/*.jar staging/
-
-            - name: Upload
+            - name: Upload JVM
               uses: actions/upload-artifact@v2
               with:
-                  name: Package
-                  path: staging
+                  name: jvm-package
+                  path: jvm/build/libs/
+
+            - name: linkReleaseExecutableNative with Gradle
+              uses: gradle/gradle-build-action@v2
+              with:
+                  arguments: native:linkReleaseExecutableNative
+
+            - name: Upload Native
+              uses: actions/upload-artifact@v2
+              with:
+                  name: native-package
+                  path: native/build/releaseExecutable/
