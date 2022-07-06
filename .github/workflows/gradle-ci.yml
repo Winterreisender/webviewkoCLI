@@ -39,6 +39,9 @@ jobs:
               uses: gradle/gradle-build-action@v2
               with:
                   arguments: native:linkReleaseExecutableNative
+              env:
+                USERNAME: ${{ secrets.USERNAME }}
+                TOKEN: ${{ secrets.TOKEN }}
 
             - name: Upload Native
               uses: actions/upload-artifact@v2
