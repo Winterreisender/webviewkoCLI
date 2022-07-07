@@ -38,7 +38,8 @@ kotlin {
         binaries {
             executable {
                 entryPoint = "com.github.winterreisender.webviewkocli.main"
-                if(!isMingwX64) linkerOpts("-Wl,-rpath=${'$'}ORIGIN")
+                if(hostOs == "Linux") linkerOpts("native/src/nativeMain/resources/linuxx64/libwebview.so","-Wl,-rpath=${'$'}ORIGIN")
+                if(hostOs == "Mac OS X") linkerOpts("native/src/nativeMain/resources/macosx64/libwebview.dylib","-Wl,-rpath=${'$'}ORIGIN")
 
                 //Copy dll,so to executable file's folder. This does not include debugTest
                 copy {
