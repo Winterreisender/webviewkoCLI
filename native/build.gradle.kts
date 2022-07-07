@@ -22,8 +22,8 @@ kotlin {
     val hostOs = System.getProperty("os.name")
     val isMingwX64 = hostOs.startsWith("Windows")
     val nativeTarget = when {
-        //hostOs == "Mac OS X" -> macosX64("native")
-        //hostOs == "Linux" -> linuxX64("native")
+        hostOs == "Mac OS X" -> macosX64("native")
+        hostOs == "Linux" -> linuxX64("native")
         isMingwX64 -> mingwX64("native")
         else -> throw GradleException("Host OS is not supported.")
     }
@@ -38,8 +38,12 @@ kotlin {
                 copy {
                     from(rootDir.resolve("native/src/nativeMain/resources/"))
                     into(outputDirectory)
-                    into(outputDirectory.toPath().parent.resolve("debugTest"))
-                    include("*.dll", "*.dylib", "*.so")
+                    when {
+                        hostOs == "Mac OS X" -> include("*.dylib")
+                        hostOs == "Linux" -> include("*.so")
+                        isMingwX64 -> include("*.dll")
+                        else -> throw GradleException("Host OS is not supported.")
+                    }
                     duplicatesStrategy= DuplicatesStrategy.WARN
                 }
             }

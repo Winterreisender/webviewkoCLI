@@ -46,5 +46,5 @@ jobs:
             - name: Upload Native
               uses: actions/upload-artifact@v2
               with:
-                  name: native-package
+                  name: native-package-win
                   path: native/build/bin/native/releaseExecutable
