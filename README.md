@@ -20,7 +20,7 @@ webviewko provides a Kotlin/Java binding to [webview](https://github.com/webview
 
 ### Prerequisite
 
-A x64 system with Java 8+ (JVM) or Windows 7+ x64 (Kotlin/Native)
+A x64 system with Java 8+ (JVM), Windows 7+ x64 (Kotlin/Native) or Linux x64
 
 ### Reference
 
@@ -39,22 +39,28 @@ Options:
 
 ### Examples
 
-Simplest way to open a web page
+Simplest way to open a web page:
 
 ```shell
 java -jar webviewkocli.jar https://example.com
 ```
 
-Setting the title, size and window hint
+Setting the title, size and window hint:
 
 ```shell
-java -jar webviewkocli.jar https://example.com --title example --width 800 --height 600 --hint fixed
+java -jar webviewkocli.jar https://example.com --width 800 --height 600
 ```
 
-Setting the JS code to be executed on loading
+Setting the JS code to be executed on loading:
 
 ```shell
 java -jar webviewkocli.jar https://example.com --init "alert('Hello World!')"
+```
+
+Use Kotlin/Native program:
+
+```shell
+webviewkocli.kexe https://example.com --title example --width 800 --height 600 --hint fixed
 ```
 
 ## Contribution
