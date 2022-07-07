@@ -25,6 +25,11 @@ jobs:
               with:
                   gradle-version: 7.4.2
 
+            - name:  refresh dependencies with Gradle
+              uses: gradle/gradle-build-action@v2
+              with:
+                  arguments: --refresh-dependencies
+
             - name: uberJar with Gradle
               uses: gradle/gradle-build-action@v2
               with:
@@ -68,15 +73,16 @@ jobs:
               with:
                   gradle-version: 7.4.2
 
-            - name: linkReleaseExecutableNative with Gradle
+            - name:  refresh dependencies with Gradle
               uses: gradle/gradle-build-action@v2
               with:
-                  arguments: native:linkReleaseExecutableNative --refresh-dependencies
+                  arguments: --refresh-dependencies
 
             - name: linkReleaseExecutableNative with Gradle
               uses: gradle/gradle-build-action@v2
               with:
                   arguments: native:linkReleaseExecutableNative
+
               env:
                   USERNAME: ${{ secrets.USERNAME }}
                   TOKEN: ${{ secrets.TOKEN }}
