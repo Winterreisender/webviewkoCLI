@@ -3,21 +3,17 @@ plugins {
     application
 }
 
-group = "com.github.Winterreisender"
-version = "0.1.1"
-description = "webviewko"
+group = "com.github.winterreisender"
+version = "0.2.0"
+description = "webviewko cli"
 
 repositories {
-    mavenLocal()
     mavenCentral()
-    //maven {
-    //    url = uri("https://maven.pkg.github.com/Winterreisender/webviewko")
-    //}
-
     maven {
-        url = uri("https://jitpack.io")
-        content {
-            includeGroup("com.github.Winterreisender.webviewko")
+        url = uri("https://maven.pkg.github.com/Winterreisender/webviewko")
+        credentials {
+            username = System.getenv("USERNAME")// ?: error("no USERNAME")
+            password = System.getenv("TOKEN")// ?: error("no TOKEN")
         }
     }
 }
@@ -26,7 +22,7 @@ tasks.jar {
     manifest {
         attributes(
             mapOf(
-                "Main-Class" to "com.github.winterreisender.webviewkocli.Main",
+                "Main-Class" to "com.github.winterreisender.webviewkocli.MainKt",
                 "Implementation-Title" to project.name,
                 "Implementation-Version" to project.version
             )
@@ -34,10 +30,8 @@ tasks.jar {
     }
 }
 
-
-
 application {
-    mainClass.set("com.github.winterreisender.webviewkocli.Main") // THIS JUST NOT WORK
+    mainClass.set("com.github.winterreisender.webviewkocli.MainKt")
 }
 
 
@@ -53,7 +47,7 @@ tasks.register<Jar>("uberJar") {
     manifest {
         attributes(
             mapOf(
-                "Main-Class" to "com.github.winterreisender.webviewkocli.Main",
+                "Main-Class" to "com.github.winterreisender.webviewkocli.MainKt",
                 "Implementation-Title" to project.name,
                 "Implementation-Version" to project.version
             )
@@ -75,8 +69,8 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.4")
     implementation("org.jetbrains.kotlinx:kotlinx-cli-jvm:0.3.4")
-    implementation("com.github.Winterreisender.webviewko:webviewko:0.2.0-dev.2")
-    implementation("com.github.Winterreisender.webviewko:webviewko-jvm:0.2.0-dev.2")
+    implementation("com.github.winterreisender:webviewko:0.2.0")
+    implementation("com.github.winterreisender:webviewko-jvm:0.2.0")
     //{
     //    exclude("net.java.dev.jna","jna")
     //}
