@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.github.winterreisender"
-version = "1.0-SNAPSHOT"
+version = "0.2.0"
 
 repositories {
     mavenCentral()
@@ -41,7 +41,6 @@ kotlin {
                 if(hostOs == "Linux") linkerOpts("native/src/nativeMain/resources/linuxx64/libwebview.so","-Wl,-rpath=${'$'}ORIGIN")
                 if(hostOs == "Mac OS X") linkerOpts("native/src/nativeMain/resources/macosx64/libwebview.dylib","-Wl,-rpath=${'$'}ORIGIN")
 
-                //Copy dll,so to executable file's folder. This does not include debugTest
                 copy {
                     from(rootDir.resolve("native/src/nativeMain/resources/${osPrefix}"))
                     into(outputDirectory)
@@ -54,7 +53,7 @@ kotlin {
     sourceSets {
         val nativeMain by getting {
             dependencies {
-                implementation("com.github.winterreisender:webviewko-${osPrefix}:0.2.0-SNAPSHOT")
+                implementation("com.github.winterreisender:webviewko-${osPrefix}:0.2.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-cli-${osPrefix}:0.3.4")
             }
         }
