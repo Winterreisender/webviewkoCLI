@@ -27,23 +27,24 @@ kotlin {
         isMingwX64 -> mingwX64("native")
         else -> throw GradleException("Host OS is not supported.")
     }
+    val osPrefix = when {
+        hostOs == "Mac OS X" -> "macosX64"
+        hostOs == "Linux" -> "linuxX64"
+        isMingwX64 -> "mingwX64"
+        else -> throw GradleException("Host OS is not supported.")
+    }.toLowerCase()
 
     nativeTarget.apply {
         binaries {
             executable {
                 entryPoint = "com.github.winterreisender.webviewkocli.main"
-                if(hostOs == "Linux") linkerOpts("-Wl,-rpath=${'$'}ORIGIN")
+                if(!isMingwX64) linkerOpts("-Wl,-rpath=${'$'}ORIGIN")
 
                 //Copy dll,so to executable file's folder. This does not include debugTest
                 copy {
-                    from(rootDir.resolve("native/src/nativeMain/resources/"))
+                    from(rootDir.resolve("native/src/nativeMain/resources/${osPrefix}"))
                     into(outputDirectory)
-                    when {
-                        hostOs == "Mac OS X" -> include("*.dylib")
-                        hostOs == "Linux" -> include("*.so")
-                        isMingwX64 -> include("*.dll")
-                        else -> throw GradleException("Host OS is not supported.")
-                    }
+                    include("*.dll", "*.dylib", "*.so")
                     duplicatesStrategy= DuplicatesStrategy.WARN
                 }
             }
@@ -52,8 +53,8 @@ kotlin {
     sourceSets {
         val nativeMain by getting {
             dependencies {
-                implementation("com.github.winterreisender:webviewko-mingwx64:0.2.0-SNAPSHOT")
-                implementation("org.jetbrains.kotlinx:kotlinx-cli-mingwx64:0.3.4")
+                implementation("com.github.winterreisender:webviewko-${osPrefix}:0.2.0-SNAPSHOT")
+                implementation("org.jetbrains.kotlinx:kotlinx-cli-${osPrefix}:0.3.4")
             }
         }
         val nativeTest by getting
