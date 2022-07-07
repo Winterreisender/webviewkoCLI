@@ -90,5 +90,5 @@ jobs:
             - name: Upload Native
               uses: actions/upload-artifact@v2
               with:
-                  name: native-package-win
+                  name: native-package-linux
                   path: native/build/bin/native/releaseExecutable
