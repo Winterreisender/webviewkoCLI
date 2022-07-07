@@ -34,6 +34,9 @@ jobs:
               uses: gradle/gradle-build-action@v2
               with:
                   arguments: jvm:uberJar
+              env:
+                  USERNAME: ${{ secrets.USERNAME }}
+                  TOKEN: ${{ secrets.TOKEN }}
 
             - name: Upload JVM
               uses: actions/upload-artifact@v2
@@ -82,7 +85,6 @@ jobs:
               uses: gradle/gradle-build-action@v2
               with:
                   arguments: native:linkReleaseExecutableNative
-
               env:
                   USERNAME: ${{ secrets.USERNAME }}
                   TOKEN: ${{ secrets.TOKEN }}
