@@ -39,7 +39,7 @@ jobs:
             - name: linkReleaseExecutableNative with Gradle
               uses: gradle/gradle-build-action@v2
               with:
-                  arguments: native:linkReleaseExecutableNative
+                  arguments: native:linkReleaseExecutableNative --refresh-dependencies
               env:
                 USERNAME: ${{ secrets.USERNAME }}
                 TOKEN: ${{ secrets.TOKEN }}
@@ -67,6 +67,11 @@ jobs:
               uses: gradle/gradle-build-action@v2
               with:
                   gradle-version: 7.4.2
+
+            - name: linkReleaseExecutableNative with Gradle
+              uses: gradle/gradle-build-action@v2
+              with:
+                  arguments: native:linkReleaseExecutableNative --refresh-dependencies
 
             - name: linkReleaseExecutableNative with Gradle
               uses: gradle/gradle-build-action@v2
