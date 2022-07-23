@@ -1,4 +1,5 @@
-package com.github.winterreisender.webviewkocli/*
+package com.github.winterreisender.webviewkocli
+/*
  * Copyright (C) 2022. Winterreisender
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +37,6 @@ fun main(args: Array<String>)
         val debug  by option(ArgType.Boolean, description = "Debug mode").default(false)
         parse(args)
 
-
         try {
             WebviewKo(if(debug) 1 else 0).let {
                 it.title(title)
@@ -47,6 +47,8 @@ fun main(args: Array<String>)
                 it.navigate(url ?: "https://github.com/Winterreisender/webviewkoCLI/wiki/Webviewko-CLI-Help")
                 it.show()
             }
+        } catch(e :Exception) {
+            println(e.message)
         } catch (e: Throwable) {
             e.printStackTrace()
         }

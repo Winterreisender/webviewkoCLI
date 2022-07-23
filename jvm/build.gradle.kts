@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.7.0"
+    kotlin("jvm") version "1.7.10"
     application
 }
 
@@ -69,8 +69,8 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.4")
     implementation("org.jetbrains.kotlinx:kotlinx-cli-jvm:0.3.4")
-    implementation("com.github.winterreisender:webviewko:0.2.0")
-    implementation("com.github.winterreisender:webviewko-jvm:0.2.0")
+    implementation("com.github.winterreisender:webviewko:0.3.0-SNAPSHOT")
+    implementation("com.github.winterreisender:webviewko-jvm:0.3.0-SNAPSHOT")
     //{
     //    exclude("net.java.dev.jna","jna")
     //}

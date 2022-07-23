@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.7.0"
+    kotlin("multiplatform") version "1.7.10"
 }
 
 group = "com.github.winterreisender"
@@ -52,7 +52,7 @@ kotlin {
     sourceSets {
         val nativeMain by getting {
             dependencies {
-                implementation("com.github.winterreisender:webviewko-${osPrefix}:0.2.0")
+                implementation("com.github.winterreisender:webviewko-${osPrefix}:0.3.0-SNAPSHOT")
                 implementation("org.jetbrains.kotlinx:kotlinx-cli-${osPrefix}:0.3.4")
             }
         }

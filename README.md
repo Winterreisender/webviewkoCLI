@@ -1,7 +1,7 @@
 # webviewkoCLI
 
 ![Kotlin](https://img.shields.io/badge/Kotlin%2FJVM-7F52FF?logo=kotlin&logoColor=white)
-![Kotlin](https://img.shields.io/badge/Kotlin%2FNative%2FMingw-7F52FF?logo=kotlin&logoColor=white)
+![Kotlin](https://img.shields.io/badge/Kotlin%2FNative-7F52FF?logo=kotlin&logoColor=white)
 ![license](https://img.shields.io/github/license/Winterreisender/webviewkoCLI)
 
 ![release](https://img.shields.io/github/v/release/Winterreisender/webviewkoCLI?label=dev&include_prereleases)

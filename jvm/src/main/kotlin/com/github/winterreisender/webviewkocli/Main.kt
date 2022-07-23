@@ -47,6 +47,8 @@ fun main(args: Array<String>) {
                 it.navigate(url ?: "https://github.com/Winterreisender/webviewkoCLI/wiki/Webviewko-CLI-Help")
                 it.show()
             }
+        } catch(e :Exception) {
+            println(e.message)
         } catch (e: Throwable) {
             e.printStackTrace()
         }
