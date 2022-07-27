@@ -3,9 +3,9 @@ plugins {
     application
 }
 
-group = "com.github.winterreisender"
-version = "0.2.0"
-description = "webviewko cli"
+//group = "com.github.winterreisender"
+//version = "0.2.0"
+//description = "webviewko cli"
 
 repositories {
     mavenCentral()
