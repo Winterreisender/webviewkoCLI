@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.7.10"
+    kotlin("plugin.serialization") version "1.7.10"
     application
 }
 
@@ -9,13 +10,7 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven {
-        url = uri("https://maven.pkg.github.com/Winterreisender/webviewko")
-        credentials {
-            username = System.getenv("USERNAME")// ?: error("no USERNAME")
-            password = System.getenv("TOKEN")// ?: error("no TOKEN")
-        }
-    }
+    maven("https://gitlab.com/api/v4/projects/38224197/packages/maven")
 }
 
 tasks.jar {
@@ -69,8 +64,10 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.4")
     implementation("org.jetbrains.kotlinx:kotlinx-cli-jvm:0.3.4")
-    implementation("com.github.winterreisender:webviewko:0.3.0-SNAPSHOT")
-    implementation("com.github.winterreisender:webviewko-jvm:0.3.0-SNAPSHOT")
+    implementation("com.github.winterreisender:webviewko:0.3.0")
+    implementation("com.github.winterreisender:webviewko-jvm:0.3.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.3.3")
     //{
     //    exclude("net.java.dev.jna","jna")
     //}

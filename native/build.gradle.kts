@@ -7,13 +7,7 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven {
-        url = uri("https://maven.pkg.github.com/Winterreisender/webviewko")
-        credentials {
-            username = System.getenv("USERNAME")// ?: error("no USERNAME")
-            password = System.getenv("TOKEN")// ?: error("no TOKEN")
-        }
-    }
+    maven("https://gitlab.com/api/v4/projects/38224197/packages/maven")
 }
 
 

@@ -24,33 +24,95 @@ package com.github.winterreisender.webviewkocli
 
 import kotlinx.cli.*
 import com.github.winterreisender.webviewko.WebviewKo
+import kotlinx.serialization.*
+import kotlinx.serialization.json.Json
+import java.nio.charset.Charset
+import java.util.concurrent.TimeUnit
+
+@Serializable
+data class ExecCommandArgument(
+    val command :List<String>,
+    val timeout :Int? = null,
+    val stdin :String? = null
+)
+
+@Serializable
+data class ExecCommandResult(
+    val info :String,
+    val stdOut :String,
+    val stdErr: String,
+    val exitCode :Int,
+    val isTimeout: Boolean = false
+)
+
 
 
 fun main(args: Array<String>) {
     with(ArgParser("webviewko")) {
-        val url by argument(ArgType.String, description = "URI/URL to navigate").optional()
-        val title by option(ArgType.String, shortName = "t", description = "Window title").default("webviewko")
-        val width by option(ArgType.Int, description = "Window width in px").default(800)
-        val height by option(ArgType.Int, description = "Window height in px").default(600)
-        val hint by option(ArgType.Choice<WebviewKo.WindowHint>(), description = "Window hint").default(WebviewKo.WindowHint.None)
-        val init by option(ArgType.String, description = "JS to run on page loading").default("")
-        val debug by option(ArgType.Boolean, description = "Debug mode").default(false)
+        val urlArg by argument(ArgType.String, fullName = "url",   description = "URI/URL to navigate").optional()
+        val titleArg by option(ArgType.String, fullName = "title", description = "Window title").default("webviewko")
+        val widthArg by option(ArgType.Int,    fullName = "width", description = "Window width in px").default(800)
+        val heightArg by option(ArgType.Int,   fullName = "height",description = "Window height in px").default(600)
+        val hintArg by option(ArgType.Choice<WebviewKo.WindowHint>(), fullName = "hint", description = "Window hint").default(WebviewKo.WindowHint.None)
+        val initArg by option(ArgType.String,  fullName = "init",  description = "JS to run on page loading").default("")
+        val debugArg by option(ArgType.Boolean,fullName = "debug", description = "Debug mode").default(false)
         parse(args)
 
         try {
-            WebviewKo(if (debug) 1 else 0).let {
-                it.title(title)
-                it.size(width, height, hint)
-                if (init.isNotEmpty()) {
-                    it.init(init)
+            WebviewKo(if (debugArg) 1 else 0).run {
+                title(titleArg)
+                size(widthArg, heightArg, hintArg)
+                if (initArg.isNotEmpty()) {
+                    init(initArg)
                 }
-                it.navigate(url ?: "https://github.com/Winterreisender/webviewkoCLI/wiki/Webviewko-CLI-Help")
-                it.show()
+
+                bind("webviewko_os_execCommand") {
+                    val arg = Json.decodeFromString<List<ExecCommandArgument>>(it)[0]
+                    val process = ProcessBuilder().command(arg.command)
+                        //.redirectInput(ProcessBuilder.Redirect.INHERIT)
+                        //.redirectOutput(ProcessBuilder.Redirect.INHERIT)
+                        //.redirectError(ProcessBuilder.Redirect.INHERIT)
+                        .start()
+
+                    if(arg.stdin != null)
+                        process.outputStream.buffered().run {
+                            write(arg.stdin.toByteArray())
+                            flush()
+                            close()
+                        }
+
+                    var isTimeout = false
+                    if(arg.timeout != null && arg.timeout != 0)
+                        if(!process.waitFor(arg.timeout.toLong(), TimeUnit.SECONDS)) {
+                            isTimeout = true
+                            process.destroy()
+                        }
+                    else
+                        process.waitFor()
+
+                    Json.encodeToString(ExecCommandResult(
+                        info = process.toString(), // No way to get pid in Java 8
+                        stdOut = process.inputStream.readBytes().toString(Charset.defaultCharset()),
+                        stdErr = process.errorStream.readBytes().toString(Charset.defaultCharset()),
+                        exitCode = process.exitValue(),
+                        isTimeout = isTimeout
+                    ))
+                }
+
+                navigate(urlArg ?: "https://github.com/Winterreisender/webviewkoCLI/wiki/Webviewko-CLI-Help")
+                show()
             }
-        } catch(e :Exception) {
+        } catch(e :Throwable) {
             println(e.message)
-        } catch (e: Throwable) {
-            e.printStackTrace()
+            if(debugArg) e.printStackTrace()
         }
     }
 }
+
+/*
+* await webviewko_os_execCommand({
+    command: ["fet"],
+    timeout: 5,
+    stdin: "abc\r\n\n"
+});
+* */
