@@ -66,7 +66,8 @@ fun main(args: Array<String>) {
                     init(initArg)
                 }
 
-                bind("webviewko_os_execCommand") {
+                /*
+                if(debugArg) bind("__webviewko_os_execCommand") {
                     val arg = Json.decodeFromString<List<ExecCommandArgument>>(it)[0]
                     val process = ProcessBuilder().command(arg.command)
                         //.redirectInput(ProcessBuilder.Redirect.INHERIT)
@@ -98,6 +99,7 @@ fun main(args: Array<String>) {
                         isTimeout = isTimeout
                     ))
                 }
+                */
 
                 navigate(urlArg ?: "https://github.com/Winterreisender/webviewkoCLI/wiki/Webviewko-CLI-Help")
                 show()
