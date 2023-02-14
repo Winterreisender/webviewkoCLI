@@ -10,8 +10,8 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.5")
     implementation("org.jetbrains.kotlinx:kotlinx-cli-js:0.3.5")
-    implementation("com.github.winterreisender:webviewko:0.5.0-SNAPSHOT")
-    implementation("com.github.winterreisender:webviewko-js:0.5.0-SNAPSHOT")
+    implementation("com.github.winterreisender:webviewko:0.5.0")
+    implementation("com.github.winterreisender:webviewko-js:0.5.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-js:1.4.0")
     testImplementation(kotlin("test"))

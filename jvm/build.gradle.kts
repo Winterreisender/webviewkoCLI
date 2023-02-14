@@ -10,7 +10,18 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven("https://gitlab.com/api/v4/projects/38224197/packages/maven")
+    maven{
+        url = uri("https://jitpack.io")
+        content {
+            excludeGroup("com.github.winterreisender")
+        }
+    }
+    maven("https://gitlab.com/api/v4/projects/38224197/packages/maven") {
+        content {
+            includeGroup("com.github.winterreisender")
+        }
+    }
+
 }
 
 tasks.jar {
@@ -64,8 +75,8 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.5")
     implementation("org.jetbrains.kotlinx:kotlinx-cli-jvm:0.3.5")
-    implementation("com.github.winterreisender:webviewko:0.5.0-SNAPSHOT")
-    implementation("com.github.winterreisender:webviewko-jvm:0.5.0-SNAPSHOT")
+    implementation("com.github.winterreisender:webviewko:0.5.0")
+    implementation("com.github.winterreisender:webviewko-jvm:0.5.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.4.0")
     //{
