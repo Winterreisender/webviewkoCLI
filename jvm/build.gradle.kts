@@ -75,8 +75,8 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.5")
     implementation("org.jetbrains.kotlinx:kotlinx-cli-jvm:0.3.5")
-    implementation("com.github.winterreisender:webviewko:0.5.0")
-    implementation("com.github.winterreisender:webviewko-jvm:0.5.0")
+    implementation("com.github.winterreisender:webviewko:0.6.0-RC2")
+    implementation("com.github.winterreisender:webviewko-jvm:0.6.0-RC2")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.4.0")
     //{

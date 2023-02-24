@@ -44,7 +44,7 @@ kotlin {
     sourceSets {
         val nativeMain by getting {
             dependencies {
-                implementation("com.github.winterreisender:webviewko-${osPrefix}:0.6.0-RC1")
+                implementation("com.github.winterreisender:webviewko-${osPrefix}:0.6.0-RC2")
                 implementation("org.jetbrains.kotlinx:kotlinx-cli-${osPrefix}:0.3.5")
             }
         }
