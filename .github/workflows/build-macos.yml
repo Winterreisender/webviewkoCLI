@@ -30,10 +30,10 @@ jobs:
             -   name: linkReleaseExecutableNative with Gradle
                 uses: gradle/gradle-build-action@v2
                 with:
-                    arguments: native06:linkReleaseExecutableNative
+                    arguments: native:linkDebugExecutableNative
 
             -   name: Upload Native
-                uses: actions/upload-artifact@v2
+                uses: actions/upload-artifact@v3
                 with:
                     name: native-package-linux
-                    path: native06/build/
+                    path: native/build/bin/native

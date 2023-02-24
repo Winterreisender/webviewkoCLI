@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.7.10"
+    kotlin("multiplatform") version "1.7.20"
 }
 
 
@@ -29,23 +29,14 @@ kotlin {
         binaries {
             executable {
                 entryPoint = "com.github.winterreisender.webviewkocli.main"
-                if(hostOs == "Linux") linkerOpts("native/src/nativeMain/resources/linuxx64/libwebview.so","-Wl,-rpath=${'$'}ORIGIN")
-                if(hostOs == "Mac OS X") linkerOpts("native/src/nativeMain/resources/macosx64/libwebview.dylib","-Wl,-rpath=${'$'}ORIGIN")
-
-                copy {
-                    from(rootDir.resolve("native/src/nativeMain/resources/${osPrefix}"))
-                    into(outputDirectory)
-                    include("*.dll", "*.dylib", "*.so")
-                    duplicatesStrategy= DuplicatesStrategy.WARN
-                }
             }
         }
     }
     sourceSets {
         val nativeMain by getting {
             dependencies {
-                implementation("com.github.winterreisender:webviewko-${osPrefix}:0.5.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-cli-${osPrefix}:0.3.4")
+                implementation("com.github.winterreisender:webviewko-${osPrefix}:0.6.0-RC1")
+                implementation("org.jetbrains.kotlinx:kotlinx-cli-${osPrefix}:0.3.5")
             }
         }
         val nativeTest by getting

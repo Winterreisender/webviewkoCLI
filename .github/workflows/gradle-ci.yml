@@ -20,7 +20,7 @@ jobs:
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
               with:
-                  gradle-version: 7.4.2
+                  gradle-version: 7.6
 
             - name:  refresh dependencies with Gradle
               uses: gradle/gradle-build-action@v2
@@ -36,7 +36,7 @@ jobs:
                   TOKEN: ${{ secrets.TOKEN }}
 
             - name: Upload JVM
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@v3
               with:
                   name: jvm-package
                   path: jvm/build/libs/
@@ -50,7 +50,7 @@ jobs:
                 TOKEN: ${{ secrets.TOKEN }}
 
             - name: Upload Native
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@v3
               with:
                   name: native-package-win
                   path: native/build/bin/native/releaseExecutable
@@ -71,7 +71,7 @@ jobs:
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
               with:
-                  gradle-version: 7.4.2
+                  gradle-version: 7.6
 
             - name:  refresh dependencies with Gradle
               uses: gradle/gradle-build-action@v2
@@ -87,7 +87,7 @@ jobs:
                   TOKEN: ${{ secrets.TOKEN }}
 
             - name: Upload Native
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@v3
               with:
                   name: native-package-linux
                   path: native/build/bin/native/releaseExecutable
