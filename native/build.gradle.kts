@@ -29,6 +29,15 @@ kotlin {
         binaries {
             executable {
                 entryPoint = "com.github.winterreisender.webviewkocli.main"
+                if(hostOs == "Linux") {
+                    linkerOpts("native/src/nativeMain/resources/linuxx64/libwebview.so","-Wl,-rpath=${'$'}ORIGIN")
+                    copy {
+                        from(rootDir.resolve("native/src/nativeMain/resources/${osPrefix}"))
+                        into(outputDirectory)
+                        include("*.so")
+                        duplicatesStrategy= DuplicatesStrategy.WARN
+                    }
+                }
             }
         }
     }
