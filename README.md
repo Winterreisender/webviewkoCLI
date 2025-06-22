@@ -1,5 +1,8 @@
 # webviewkoCLI
 
+> [!IMPORTANT]
+> This project is archived because webviewko is unmaintained
+
 ![Kotlin](https://img.shields.io/badge/Kotlin%2FJVM-7F52FF?logo=kotlin&logoColor=white)
 ![Kotlin](https://img.shields.io/badge/Kotlin%2FNative-7F52FF?logo=kotlin&logoColor=white)
 ![license](https://img.shields.io/github/license/Winterreisender/webviewkoCLI)
